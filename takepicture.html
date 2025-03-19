@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Take Picture - PHOTO BOOTH</title>
+  <link rel="stylesheet" href="takepicture.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Take Your Pictures</h1>
+    <div class="camera-container">
+      <!-- Video Box: Live camera feed with countdown overlay -->
+      <div class="video-box">
+        <video id="video" autoplay playsinline></video>
+        <div id="countdown" class="countdown"></div>
+      </div>
+      <!-- Thumbnails: Captured images appear here -->
+      <div class="thumbnails" id="thumbnails"></div>
+    </div>
+    <div class="controls">
+      <button id="captureBtn">Capture</button>
+      <button id="retakeBtn" style="display: none;">Retake</button>
+      <button id="doneBtn" style="display: none;">Done</button>
+    </div>
+  </div>
+  <script src="script-takepicture.js"></script>
+</body>
+</html>

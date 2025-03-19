@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHOTO BOOTH - Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Using a modern Google Font for a high-tech look -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <section class="login-section" id="loginSection">
+    <h1>Welcome to PHOTO BOOTH</h1>
+    <p>Please log in to continue.</p>
+    
+    <!-- Login Form -->
+    <div class="login-form" id="loginForm">
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button id="loginBtn">Login</button>
+      <p class="toggle-link">Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+    </div>
+    
+    <!-- Registration Form (hidden by default) -->
+    <div class="register-form" id="registerForm" style="display: none;">
+      <input type="text" id="regUsername" placeholder="Choose a Username" />
+      <input type="password" id="regPassword" placeholder="Choose a Password" />
+      <input type="password" id="regConfirmPassword" placeholder="Confirm Password" />
+      <button id="registerBtn">Register</button>
+      <p class="toggle-link">Already have an account? <a href="#" id="showLogin">Login here</a></p>
+    </div>
+  </section>
+
+  <script src="script-index.js"></script>
+</body>
+</html>

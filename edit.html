@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Pictures - PHOTO BOOTH</title>
+  <link rel="stylesheet" href="edit.css">
+</head>
+<body>
+  <div class="edit-wrapper">
+    <div class="images-container">
+      <h2>Your Photo Booth Collage</h2>
+      <div class="images-box" id="imagesBox">
+        <div class="images-inner" id="imagesInner">
+          <!-- Images will be inserted here -->
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-container">
+      <h2>Editing Options</h2>
+      
+      <!-- Original Controls -->
+      <div class="control-group">
+        <label for="paddingColor">Padding Color:</label>
+        <input type="color" id="paddingColor" value="#ffffff">
+      </div>
+      <div class="control-group">
+        <label for="colorFilterSelect">Color Filter:</label>
+        <select id="colorFilterSelect">
+          <option value="none">None</option>
+          <option value="sepia(1)">Sepia</option>
+          <option value="grayscale(1)">Black & White</option>
+          <option value="brightness(1.2)">Vintage</option>
+        </select>
+      </div>
+
+      <!-- New Features -->
+      <div class="control-group">
+        <label for="aspectRatio">Aspect Ratio:</label>
+        <select id="aspectRatio">
+          <option value="free">Free</option>
+          <option value="1:1">1:1 (Square)</option>
+          <option value="4:3">4:3 (Standard)</option>
+          <option value="16:9">16:9 (Widescreen)</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="rotateSlider">Rotate (degrees):</label>
+        <input type="range" id="rotateSlider" min="0" max="360" value="0">
+      </div>
+      <div class="control-group">
+        <label for="flipHorizontal">Flip Horizontal:</label>
+        <input type="checkbox" id="flipHorizontal">
+        <label for="flipVertical">Flip Vertical:</label>
+        <input type="checkbox" id="flipVertical">
+      </div>
+      <div class="control-group">
+        <label for="brightnessSlider">Brightness:</label>
+        <input type="range" id="brightnessSlider" min="0" max="200" value="100">
+      </div>
+      <div class="control-group">
+        <label for="contrastSlider">Contrast:</label>
+        <input type="range" id="contrastSlider" min="0" max="200" value="100">
+      </div>
+      <div class="control-group">
+        <label for="saturationSlider">Saturation:</label>
+        <input type="range" id="saturationSlider" min="0" max="200" value="100">
+      </div>
+      <div class="control-group">
+        <label for="exposureSlider">Lightness:</label>
+        <input type="range" id="exposureSlider" min="0" max="200" value="100">
+      </div>
+      <div class="control-group">
+        <label for="advancedFilters">Advanced Filters:</label>
+        <select id="advancedFilters">
+          <option value="none">None</option>
+          <option value="hue-rotate(90deg)">Psychedelic</option>
+          <option value="invert(1)">Invert</option>
+          <option value="blur(2px)">Soft Focus</option>
+        </select>
+      </div>
+      <!-- Removed text overlay feature and red eye reduction/skin smoothing controls -->
+      <div class="control-group">
+        <label for="frameSelect">Select Frame:</label>
+        <select id="frameSelect">
+          <option value="none">None</option>
+          <option value="polaroid">Polaroid</option>
+          <option value="vintage">Vintage</option>
+          <option value="modern">Modern</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <button id="saveBtn">Save & Download</button>
+      </div>
+    </div>
+  </div>
+  <script src="script-edit.js"></script>
+</body>
+</html>
