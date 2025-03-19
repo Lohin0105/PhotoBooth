@@ -13,17 +13,15 @@
     <img src="photo booth logo.png" alt="Logo">
   </div>
 
-  <div class="auth-container" id="authContainer">
+  <div id="authContainer" class="auth-container">
     <h2>Login</h2>
     <form id="authForm">
-      <input type="text" id="username" placeholder="Username" required>
-      <input type="password" id="password" placeholder="Password" required>
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
       <button type="submit">Login</button>
+      <p id="switchToRegister">Don't have an account? <span class="link">Register</span></p>
     </form>
-    <p id="errorMessage" class="error"></p>
-    <div class="auth-switch">
-      <p>Don't have an account? <a href="#" id="switchToRegister">Register</a></p>
-    </div>
+    <p id="errorMessage" class="error-message"></p>
   </div>
 
   <script src="script-index.js"></script>
