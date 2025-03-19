@@ -1,80 +1,81 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Redirect to main.html if already logged in
-  if (localStorage.getItem('isLoggedIn') === 'true') {
-    window.location.href = 'main.html';
-  }
+let isRegistering = false;
 
-  // Get form elements
-  const loginForm = document.getElementById('loginForm');
-  const registerForm = document.getElementById('registerForm');
-  const loginBtn = document.getElementById('loginBtn');
-  const usernameInput = document.getElementById('username');
-  const passwordInput = document.getElementById('password');
-  const showRegister = document.getElementById('showRegister');
-  const showLogin = document.getElementById('showLogin');
-  const registerBtn = document.getElementById('registerBtn');
-  const regUsername = document.getElementById('regUsername');
-  const regPassword = document.getElementById('regPassword');
-  const regConfirmPassword = document.getElementById('regConfirmPassword');
+// Splash screen timeout
+setTimeout(() => {
+  document.getElementById("splashScreen").style.opacity = '0';
+  setTimeout(() => {
+    document.getElementById("splashScreen").style.display = 'none';
+    document.getElementById("authContainer").style.display = 'block';
+  }, 500);
+}, 3000);
 
-  // Toggle to registration form
-  showRegister.addEventListener('click', (e) => {
-    e.preventDefault();
-    loginForm.style.display = 'none';
-    registerForm.style.display = 'block';
-  });
-
-  // Toggle to login form
-  if (showLogin) {
-    showLogin.addEventListener('click', (e) => {
-      e.preventDefault();
-      registerForm.style.display = 'none';
-      loginForm.style.display = 'block';
-    });
-  }
-
-  // Login event
-  loginBtn.addEventListener('click', () => {
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
-    if (!username || !password) {
-      alert('Please enter valid credentials.');
-      return;
-    }
-    // Retrieve registered users from localStorage (stored as an object)
-    let users = JSON.parse(localStorage.getItem('users')) || {};
-    if (users[username] && users[username] === password) {
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('username', username);
-      window.location.href = 'main.html';
-    } else {
-      alert('Invalid username or password.');
-    }
-  });
-
-  // Registration event
-  registerBtn.addEventListener('click', () => {
-    const username = regUsername.value.trim();
-    const password = regPassword.value.trim();
-    const confirmPassword = regConfirmPassword.value.trim();
-    if (!username || !password || !confirmPassword) {
-      alert('Please fill in all fields.');
-      return;
-    }
-    if (password !== confirmPassword) {
-      alert('Passwords do not match.');
-      return;
-    }
-    let users = JSON.parse(localStorage.getItem('users')) || {};
-    if (users[username]) {
-      alert('Username already exists.');
-      return;
-    }
-    // Register the new user
-    users[username] = password;
-    localStorage.setItem('users', JSON.stringify(users));
-    alert('Registration successful! You can now log in.');
-    registerForm.style.display = 'none';
-    loginForm.style.display = 'block';
-  });
+// Event listeners
+document.getElementById("switchToRegister").addEventListener("click", function (e) {
+  e.preventDefault();
+  isRegistering = true;
+  updateAuthForm();
 });
+
+document.getElementById("authForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  handleAuthSubmit();
+});
+
+// Functions
+function updateAuthForm() {
+  const authContainer = document.getElementById("authContainer");
+  const form = document.getElementById("authForm");
+  const errorMessage = document.getElementById("errorMessage");
+
+  if (isRegistering) {
+    authContainer.querySelector("h2").textContent = "Register";
+    form.innerHTML = `
+      <input type="text" id="newUsername" placeholder="Username" required>
+      <input type="password" id="newPassword" placeholder="Password" required>
+      <button type="submit">Register</button>
+    `;
+    document.getElementById("switchToRegister").textContent = "Already have an account? Login";
+  } else {
+    authContainer.querySelector("h2").textContent = "Login";
+    form.innerHTML = `
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    `;
+    document.getElementById("switchToRegister").textContent = "Don't have an account? Register";
+  }
+  errorMessage.textContent = "";
+}
+
+function handleAuthSubmit() {
+  if (isRegistering) {
+    const username = document.getElementById("newUsername").value;
+    const password = document.getElementById("newPassword").value;
+
+    if (!localStorage.getItem(username)) {
+      localStorage.setItem(username, JSON.stringify({ username, password }));
+      alert("Registration successful! You can now login.");
+      isRegistering = false;
+      updateAuthForm();
+    } else {
+      document.getElementById("errorMessage").textContent = "Username already exists!";
+    }
+  } else {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const userData = localStorage.getItem(username);
+
+    if (userData) {
+      const storedUser = JSON.parse(userData);
+      if (storedUser.password === password) {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("username", username);
+        window.location.href = "main.html";
+      } else {
+        document.getElementById("errorMessage").textContent = "Incorrect password!";
+      }
+    } else {
+      document.getElementById("errorMessage").textContent = "Username not found!";
+    }
+  }
+}
