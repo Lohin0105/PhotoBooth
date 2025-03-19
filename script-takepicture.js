@@ -1,15 +1,14 @@
-// Element references
 const video = document.getElementById('video');
 const captureBtn = document.getElementById('captureBtn');
 const retakeBtn = document.getElementById('retakeBtn');
 const doneBtn = document.getElementById('doneBtn');
 const countdownElem = document.getElementById('countdown');
 const thumbnailsContainer = document.getElementById('thumbnails');
+const controls = document.querySelector('.controls');
 
 let capturedImages = [];
 let stream = null;
 
-// Start camera access
 async function startCamera() {
   try {
     stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -25,7 +24,6 @@ async function startCamera() {
   }
 }
 
-// Countdown function
 function runCountdown(seconds) {
   return new Promise((resolve) => {
     let counter = seconds;
@@ -44,7 +42,6 @@ function runCountdown(seconds) {
   });
 }
 
-// Capture the current video frame
 function captureFrame() {
   const canvas = document.createElement('canvas');
   canvas.width = video.videoWidth;
@@ -54,14 +51,12 @@ function captureFrame() {
   return canvas.toDataURL('image/png');
 }
 
-// Add thumbnail image
 function addThumbnail(imageData) {
   const img = document.createElement('img');
   img.src = imageData;
   thumbnailsContainer.appendChild(img);
 }
 
-// Capture button event
 captureBtn.addEventListener('click', async () => {
   await runCountdown(3);
   const imageData = captureFrame();
@@ -72,10 +67,12 @@ captureBtn.addEventListener('click', async () => {
     captureBtn.style.display = 'none';
     retakeBtn.style.display = 'inline-block';
     doneBtn.style.display = 'inline-block';
+    setTimeout(() => {
+      controls.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 300);
   }
 });
 
-// Retake: reset process
 retakeBtn.addEventListener('click', () => {
   capturedImages = [];
   thumbnailsContainer.innerHTML = '';
@@ -84,7 +81,6 @@ retakeBtn.addEventListener('click', () => {
   doneBtn.style.display = 'none';
 });
 
-// ✅ Done: Stop camera, save images to localStorage, and redirect to edit page
 doneBtn.addEventListener('click', () => {
   if (stream) {
     stream.getTracks().forEach(track => track.stop());
@@ -93,5 +89,4 @@ doneBtn.addEventListener('click', () => {
   window.location.href = 'edit.html';
 });
 
-// Start the camera when the page loads
 startCamera();
