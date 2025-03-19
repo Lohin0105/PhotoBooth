@@ -23,11 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = 'main.html';
   });
 
-  document.getElementById('recentLink').addEventListener('click', (e) => {
-    e.preventDefault();
-    alert('Recent Pics clicked!');
-  });
-
   document.getElementById('logoutLink').addEventListener('click', (e) => {
     e.preventDefault();
     localStorage.removeItem('isLoggedIn');
