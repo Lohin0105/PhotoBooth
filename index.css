@@ -7,6 +7,16 @@
     height: 100%;
     background-color: #fafafa;
   }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: url('background.png') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
   
   .login-section h1 {
     margin-bottom: 10px;
