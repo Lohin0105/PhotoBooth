@@ -1,3 +1,4 @@
+ 
 // Element references
 const fileInput = document.getElementById('fileInput');
 const previewImage = document.getElementById('previewImage');
