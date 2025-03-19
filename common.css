@@ -1,0 +1,29 @@
+/* common.css */
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
+    color: #333;
+  }
+  
+  /* Responsive Media Query */
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .hamburger {
+      display: none;
+    }
+  }
