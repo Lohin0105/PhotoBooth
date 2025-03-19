@@ -47,13 +47,24 @@ function updateAuthForm() {
   errorMessage.textContent = "";
 }
 
-function handleAuthSubmit() {
-  if (isRegistering) {
-    const username = document.getElementById("newUsername").value;
-    const password = document.getElementById("newPassword").value;
+// Add localStorage persistence check
+window.addEventListener('load', function() {
+  if (localStorage.getItem('users') === null) {
+    localStorage.setItem('users', JSON.stringify({}));
+  }
+});
 
-    if (!localStorage.getItem(username)) {
-      localStorage.setItem(username, JSON.stringify({ username, password }));
+// Modified registration handler
+function handleAuthSubmit() {
+  const users = JSON.parse(localStorage.getItem('users'));
+
+  if (isRegistering) {
+    const username = document.getElementById("newUsername").value.trim();
+    const password = document.getElementById("newPassword").value.trim();
+
+    if (!users[username]) {
+      users[username] = { username, password };
+      localStorage.setItem('users', JSON.stringify(users));
       alert("Registration successful! You can now login.");
       isRegistering = false;
       updateAuthForm();
@@ -61,15 +72,13 @@ function handleAuthSubmit() {
       document.getElementById("errorMessage").textContent = "Username already exists!";
     }
   } else {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const userData = localStorage.getItem(username);
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    if (userData) {
-      const storedUser = JSON.parse(userData);
-      if (storedUser.password === password) {
+    if (users[username]) {
+      if (users[username].password === password) {
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("username", username);
+        localStorage.setItem("currentUser", username);
         window.location.href = "main.html";
       } else {
         document.getElementById("errorMessage").textContent = "Incorrect password!";
