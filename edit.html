@@ -32,7 +32,18 @@
     <div class="controls-container">
       <h2>Editing Options</h2>
       
-      <!-- Original Controls -->
+      <!-- Output Quality Selector -->
+      <div class="control-group">
+        <label for="resolution">Output Quality:</label>
+        <select id="resolution">
+          <option value="144">144p (Mobile)</option>
+          <option value="480">480p (SD)</option>
+          <option value="720" selected>720p (HD)</option>
+          <option value="1080">1080p (Full HD)</option>
+          <option value="2160">2160p (4K)</option>
+        </select>
+      </div>
+
       <div class="control-group">
         <label for="paddingColor">Padding Color:</label>
         <input type="color" id="paddingColor" value="#ffffff">
@@ -46,8 +57,6 @@
           <option value="brightness(1.2)">Vintage</option>
         </select>
       </div>
-
-      <!-- New Features -->
       <div class="control-group">
         <label for="aspectRatio">Aspect Ratio:</label>
         <select id="aspectRatio">
@@ -92,7 +101,6 @@
           <option value="blur(2px)">Soft Focus</option>
         </select>
       </div>
-      <!-- Removed text overlay feature and red eye reduction/skin smoothing controls -->
       <div class="control-group">
         <label for="frameSelect">Select Frame:</label>
         <select id="frameSelect">
